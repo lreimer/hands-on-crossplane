@@ -74,6 +74,14 @@ kubectl apply -f xrd/repository/examples/example-repository.yaml
 
 cd xrd/repository/
 kubectl crossplane build configuration --ignore=examples/example-repository.yaml
+
+# use XRD to create an S3 bucket
+kubectl apply -f xrd/bucket/definition.yaml
+kubectl apply -f xrd/bucket/composition.yaml
+kubectl apply -f xrd/bucket/examples/example-bucket.yaml
+
+cd xrd/bucket/
+kubectl crossplane build configuration --ignore=examples/example-bucket.yaml
 ```
 
 
