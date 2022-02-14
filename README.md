@@ -60,7 +60,20 @@ aws sns publish --subject Test --message Crossplane --topic-arn arn:aws:sns:eu-c
 kubectl apply -f aws/sqs/queue.yaml
 aws sqs list-queues
 
-# 
+# create EFS file system and mount point
+k apply -f aws/efs/filesystem.yaml
+aws efs describe-file-systems
+k apply -f aws/efs/mounttarget.yaml
+# the mount target takes some time to be available
+aws efs describe-mount-targets --file-system-id <FileSystemId>
+
+# use XRD to create an ECR
+kubectl apply -f xrd/repository/definition.yaml
+kubectl apply -f xrd/repository/composition.yaml
+kubectl apply -f xrd/repository/examples/example-repository.yaml
+
+cd xrd/repository/
+kubectl crossplane build configuration --ignore=examples/example-repository.yaml
 ```
 
 

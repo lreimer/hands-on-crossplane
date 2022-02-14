@@ -1,0 +1,19 @@
+apiVersion: efs.aws.crossplane.io/v1alpha1
+kind: FileSystem
+metadata:
+  name: test-filesystem
+  labels:
+    region: eu-central-1
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    region: eu-central-1
+    encrypted: true
+    throughputMode: bursting
+    tags:
+      - key: Name
+        value: test-filesystem
+      - key: Version
+        value: v1.0.0
+  providerConfigRef:
+    name: providerconfig-aws

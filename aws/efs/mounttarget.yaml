@@ -1,0 +1,16 @@
+apiVersion: efs.aws.crossplane.io/v1alpha1
+kind: MountTarget
+metadata:
+  name: test-mounttarget
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    region: eu-central-1
+    subnetID: subnet-7c745915
+    fileSystemIDRef: 
+      name: test-filesystem
+  providerConfigRef:
+    name: providerconfig-aws
+  writeConnectionSecretToRef:
+    name: test-mounttarget
+    namespace: default
