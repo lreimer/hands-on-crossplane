@@ -27,9 +27,12 @@ spec:
               parameters:
                 type: object
                 properties:
+                  bucketName:
+                    type: string
                   region:
                     type: string
                 required:
+                  - bucketName
                   - region
             required:
               - parameters

@@ -7,4 +7,5 @@ metadata:
     crossplane.io/external-name: example-bucket-eu-central-1
 spec:
   parameters:
+    bucketName: example-bucket-eu-central-1
     region: eu-central-1

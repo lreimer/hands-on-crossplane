@@ -26,6 +26,8 @@ spec:
           providerConfigRef:
             name: providerconfig-aws          
       patches:
+        - fromFieldPath: "spec.parameters.bucketName"
+          toFieldPath: "metadata.name"
         - fromFieldPath: "metadata.annotations.crossplane.io/external-name"
           toFieldPath: "metadata.annotations.crossplane.io/external-name"
         - fromFieldPath: "spec.parameters.region"
