@@ -1,9 +1,10 @@
 apiVersion: meta.pkg.crossplane.io/v1alpha1
 kind: Configuration
 metadata:
-  name: getting-started-with-aws
+  name: aws-ecr
   annotations:
     provider: aws
+    service: ecr
 spec:
   crossplane:
     version: ">=v1.2.0-0"
