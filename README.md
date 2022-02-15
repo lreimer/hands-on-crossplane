@@ -67,6 +67,9 @@ k apply -f aws/efs/mounttarget.yaml
 # the mount target takes some time to be available
 aws efs describe-mount-targets --file-system-id <FileSystemId>
 
+# create MQ broker
+
+
 # use XRD to create an ECR
 kubectl apply -f xrd/repository/definition.yaml
 kubectl apply -f xrd/repository/composition.yaml
@@ -82,6 +85,24 @@ kubectl apply -f xrd/bucket/examples/example-bucket.yaml
 
 cd xrd/bucket/
 kubectl crossplane build configuration --ignore=examples/example-bucket.yaml
+
+# use XRD to create PostgreSQL instance
+kubectl apply -f xrd/postgresql/definition.yaml
+kubectl apply -f xrd/postgresql/composition.yaml
+kubectl apply -f xrd/postgresql/examples/example-db.yaml
+
+kubectl get postgresqlinstances.db.aws.qaware.de example-db
+kubectl get claim
+
+kubectl get secrets
+kubectl describe secret example-db-conn
+
+kubectl apply -f xrd/postgresql/examples/example-db-client.yaml
+kubectl get pods
+kubectl logs example-db-client-sjdh7
+
+cd xrd/postgresql/
+kubectl crossplane build configuration --ignore=examples/example-db.yaml,examples/example-db-client.yaml
 ```
 
 
