@@ -67,8 +67,16 @@ k apply -f aws/efs/mounttarget.yaml
 # the mount target takes some time to be available
 aws efs describe-mount-targets --file-system-id <FileSystemId>
 
-# create MQ broker
+# create MQ brokers
+kubectl create secret generic test-activemq-admin -n crossplane-system --from-literal=password=testPassword123
+kubectl apply -f aws/mq/activemq-broker.yaml
+kubectl get broker
+kubectl describe secret test-activemq
 
+kubectl create secret generic test-rabbitmq-admin -n crossplane-system --from-literal=password=testPassword123
+kubectl apply -f aws/mq/rabbitmq-broker.yaml
+kubectl get broker
+kubectl describe secret test-rabbitmq
 
 # use XRD to create an ECR
 kubectl apply -f xrd/repository/definition.yaml

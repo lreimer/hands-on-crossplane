@@ -1,0 +1,33 @@
+apiVersion: mq.aws.crossplane.io/v1alpha1
+kind: Broker
+metadata:
+  name: test-activemq
+spec:
+  deletionPolicy: Delete
+  forProvider:
+    region: eu-central-1
+    engineType: ActiveMQ
+    storageType: EFS
+    engineVersion: 5.16.3
+    autoMinorVersionUpgrade: true
+    hostInstanceType: mq.t3.micro
+    deploymentMode: SINGLE_INSTANCE
+    encryptionOptions:
+      useAWSOwnedKey: true
+    publiclyAccessible: true
+    subnetIDs:
+      - subnet-7c745915
+    securityGroups:
+      - sg-0a4c5663
+    users: 
+      - username: activemq-admin
+        consoleAccess: true
+        passwordSecretRef:
+          key: password
+          name: test-activemq-admin
+          namespace: crossplane-system
+  writeConnectionSecretToRef:
+    name: test-activemq
+    namespace: default
+  providerConfigRef:
+    name: providerconfig-aws
