@@ -22,7 +22,7 @@ kubectl get all -n crossplane-system
 
 Next we need to configure the actual cloud provider, e.g. AWS and GCP. 
 
-### AWS 
+### Using the AWS Provider
 
 For AWS the configuration needs to reference the required credentials in the form of a secret.
 These are basically the `aws_access_key_id` and `aws_secret_access_key` from the default profile found in the `${HOME}/.aws/credentials` file. With this information we can create a secret and reference it from a provider config resource.
